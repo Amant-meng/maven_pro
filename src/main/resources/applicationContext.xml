@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <context:annotation-config />
+
+    <!--修改   业务层接口所在的包-->
+    <context:component-scan base-package="com.ym.service" />
+
+    <!-- 导入数据库配置文件 -->
+    <context:property-placeholder location="classpath:db.properties" />
+
+    <!--配置数据库连接池> -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="clone">
+        <!--基本属性 url、user、password-->
+        <property name="url" value="${jdbc.url"/>
+        <property name="username" value="${jdbc.username" />
+        <property name="password" value="${jdbc.password"/>
+
+        <!-- 配置初始化大小、最小、最大-->
+        <property name="initialSize" value="1"/>
+        <property name="minIdle" value="1"/>
+        <property name="maxActive" value="20"/>
+
+        <!--配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="30000"/>
+
+        <!--配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒-->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+
+        <property name="validationQuery" value="SELECT 1"/>
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+
+        <!--打开PSCache,并且置顶每个连接上的PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
+    </bean>
+
+    <!--Mybatis的SessionFactory配置 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+
+        <!--修改   实体类所在的包-->
+        <property name="typeAliasesPackage" value="com.ym.entity"/>
+        <!--修改   配置DAO接口和映射配置文件的包-->
+        <property name="mapperLocations" value="classpath:com/ym/mapper/*.xml"/>
+        <!--分页插件，目前先注释，后面重构的时候才会使用
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+        -->
+    </bean>
+
+    <!--配置扫描包  加载mapper代理对象 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ym.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+</beans>

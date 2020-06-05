@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+       http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.0.xsd">
+
+     <!-- 配置注解驱动 -->
+     <mvc:annotation-driven />  
+
+     <!-- 配置包扫描，扫描@Controller注解类-->
+    <context:component-scan base-package="com.ym.controller" use-default-filters="false">
+        <context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+    </context:component-scan>
+
+     <!-- 文件上传功能需该配置 -->
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+            <!-- ResourceBundleThemeSource是ThemeSource接口默认实现类-->
+    <bean class="org.springframework.ui.context.support.ResourceBundleThemeSource" id="themeSource"/>
+            <!-- 用于实现用户所选的主题，以Cookie的方式存放在客户端的机器上-->
+    <bean class="org.springframework.web.servlet.theme.CookieThemeResolver" id="themeResolver" p:cookieName="theme" p:defaultThemeName="standard"/>
+            
+
+    <!-- 配置使用 SimpleMappingExceptionResolver 来映射异常 -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver" >
+        <!-- 定义默认的异常处理页面 -->  
+        <property name="defaultErrorView" value="error"/> 
+             <!-- 
+            配置异常的属性值为ex，那么在错误页面中可以通过 ${exception} 来获取异常的信息
+            如果不配置这个属性，它的默认值为exception
+             -->
+        <property name="exceptionAttribute" value="exception"></property>
+        <property name="exceptionMappings">
+            <props>
+            <!-- 映射特殊异常对应error.jsp这个页面 -->
+                <prop key=".DataAccessException">error</prop>
+                <prop key=".NoSuchRequestHandlingMethodException">error</prop>
+                <prop key=".TypeMismatchException">error</prop>
+                <prop key=".MissingServletRequestParameterException">error</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 配置jsp视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="jspViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>
