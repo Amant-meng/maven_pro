@@ -15,7 +15,7 @@
      <mvc:annotation-driven />  
 
      <!-- 配置包扫描，扫描@Controller注解类-->
-    <context:component-scan base-package="com.ym.controller" use-default-filters="false">
+    <context:component-scan base-package="com.ym.controller" >
         <context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
 

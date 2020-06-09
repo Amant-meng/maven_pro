@@ -5,7 +5,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
   <!--项目名称-->
-  <!--<display-name>maven_pro</display-name>-->
+  <!--<display-name>maven_project</display-name>-->
   <!--首页文件列表-->
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
@@ -41,7 +41,7 @@
     在WEB-INF目录下创建的xml文件的名称必须是applicationContext.xml。-->
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:spring-*.xml</param-value>
+      <param-value>classpath:applicationContext.xml</param-value>
     </init-param>
     <!--2.2如果值为正整数或者0时，表示容器在应用启动时就加载并初始化这个servlet，
           值越小，servlet的优先级越高，就越先被加载。 -->

@@ -1,9 +1,9 @@
 package com.ym.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Teacher implements Serializable {
+public class TeacherVo {
+
     private Integer t_id;
 
     private String t_name;
@@ -24,7 +24,24 @@ public class Teacher implements Serializable {
 
     private String deltag;
 
-    private static final long serialVersionUID = 1L;
+    private String dept_name;
+
+    public TeacherVo() {
+    }
+
+    public TeacherVo(Integer t_id, String t_name, String t_sex, String t_age, String t_phone, String t_address, Integer dept_id, Date c_time, Date m_time, String deltag, String dept_name) {
+        this.t_id = t_id;
+        this.t_name = t_name;
+        this.t_sex = t_sex;
+        this.t_age = t_age;
+        this.t_phone = t_phone;
+        this.t_address = t_address;
+        this.dept_id = dept_id;
+        this.c_time = c_time;
+        this.m_time = m_time;
+        this.deltag = deltag;
+        this.dept_name = dept_name;
+    }
 
     public Integer getT_id() {
         return t_id;
@@ -39,7 +56,7 @@ public class Teacher implements Serializable {
     }
 
     public void setT_name(String t_name) {
-        this.t_name = t_name == null ? null : t_name.trim();
+        this.t_name = t_name;
     }
 
     public String getT_sex() {
@@ -47,7 +64,7 @@ public class Teacher implements Serializable {
     }
 
     public void setT_sex(String t_sex) {
-        this.t_sex = t_sex == null ? null : t_sex.trim();
+        this.t_sex = t_sex;
     }
 
     public String getT_age() {
@@ -55,7 +72,7 @@ public class Teacher implements Serializable {
     }
 
     public void setT_age(String t_age) {
-        this.t_age = t_age == null ? null : t_age.trim();
+        this.t_age = t_age;
     }
 
     public String getT_phone() {
@@ -63,7 +80,7 @@ public class Teacher implements Serializable {
     }
 
     public void setT_phone(String t_phone) {
-        this.t_phone = t_phone == null ? null : t_phone.trim();
+        this.t_phone = t_phone;
     }
 
     public String getT_address() {
@@ -71,7 +88,7 @@ public class Teacher implements Serializable {
     }
 
     public void setT_address(String t_address) {
-        this.t_address = t_address == null ? null : t_address.trim();
+        this.t_address = t_address;
     }
 
     public Integer getDept_id() {
@@ -103,22 +120,14 @@ public class Teacher implements Serializable {
     }
 
     public void setDeltag(String deltag) {
-        this.deltag = deltag == null ? null : deltag.trim();
+        this.deltag = deltag;
     }
 
-    @Override
-    public String toString() {
-        return "Teacher{" +
-                "t_id=" + t_id +
-                ", t_name='" + t_name + '\'' +
-                ", t_sex='" + t_sex + '\'' +
-                ", t_age='" + t_age + '\'' +
-                ", t_phone='" + t_phone + '\'' +
-                ", t_address='" + t_address + '\'' +
-                ", dept_id=" + dept_id +
-                ", c_time=" + c_time +
-                ", m_time=" + m_time +
-                ", deltag='" + deltag + '\'' +
-                '}';
+    public String getDept_name() {
+        return dept_name;
+    }
+
+    public void setDept_name(String dept_name) {
+        this.dept_name = dept_name;
     }
 }
