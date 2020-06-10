@@ -1,5 +1,7 @@
 package com.ym.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -23,6 +25,9 @@ public class Teacher implements Serializable {
     private Date m_time;
 
     private String deltag;
+
+    @TableField(exist = false)
+    private String dept_name;
 
     private static final long serialVersionUID = 1L;
 
@@ -119,6 +124,7 @@ public class Teacher implements Serializable {
                 ", c_time=" + c_time +
                 ", m_time=" + m_time +
                 ", deltag='" + deltag + '\'' +
+                ", dept_name='" + dept_name + '\'' +
                 '}';
     }
 }

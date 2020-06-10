@@ -36,10 +36,15 @@ public class MybatisUtil {
 
         /**
          * openSession(boolean)默认是true，自动提交事务
+         * 在增加，修改，删除的时候必须要提交事务 否则不会成功
          */
         return sqlSessionFactory.openSession(false);
     }
 
+    /**
+     * 关闭事务
+     * @param sqlSession
+     */
     public static void closeSqlSession(SqlSession sqlSession) {
         if (sqlSession != null) {
             sqlSession.close();
