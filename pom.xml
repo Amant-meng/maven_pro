@@ -68,6 +68,20 @@
       <version>2.0.0</version>
     </dependency>
 
+    <!--通用mapper-->
+    <dependency>
+      <groupId>tk.mybatis</groupId>
+      <artifactId>mapper</artifactId>
+      <version>4.0.4</version>
+    </dependency>
+
+    <!-- mybatis-plus -->
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus</artifactId>
+      <version>3.2.0</version>
+    </dependency>
+
     <!-- 分页插件 -->
     <dependency>
       <groupId>com.github.pagehelper</groupId>
@@ -89,7 +103,6 @@
       <version>1.1.12</version>
     </dependency>
 
-
     <!-- spring-core -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -104,35 +117,10 @@
       <version>3.2.9.RELEASE</version>
     </dependency>
 
-
-    <!-- fastjson -->
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
-      <version>1.2.62</version>
-    </dependency>
-
-
-    <!-- lombok插件 -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.8</version>
-      <scope>provided</scope>
-    </dependency>
-
-
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
       <version>3.2.9.RELEASE</version>
-    </dependency>
-
-    <!-- mybatis-plus -->
-    <dependency>
-      <groupId>com.baomidou</groupId>
-      <artifactId>mybatis-plus</artifactId>
-      <version>3.2.0</version>
     </dependency>
 
     <!-- spring-tx -->
@@ -149,6 +137,21 @@
       <version>4.2.8.RELEASE</version>
     </dependency>
 
+    <!-- fastjson -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.62</version>
+    </dependency>
+
+    <!-- lombok插件 -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.8</version>
+      <scope>provided</scope>
+    </dependency>
+
     <!--<dependency>
        <groupId>org.springframework</groupId>
        <artifactId>spring-websocket</artifactId>
@@ -160,6 +163,13 @@
       <groupId>org.mybatis.generator</groupId>
       <artifactId>mybatis-generator-core</artifactId>
       <version>1.3.2</version>
+    </dependency>
+
+    <!--二维码生成-->
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>core</artifactId>
+      <version>3.3.0</version>
     </dependency>
 
   </dependencies>
@@ -179,7 +189,16 @@
         </configuration>
       </plugin>-->
 
-      <!--mybatis的DAO接口和映射配置文件自动生成-->
+      <!--maven编译插件-->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+
+      <!--mybatis的通用mapper插件-->
       <plugin>
         <groupId>org.mybatis.generator</groupId>
         <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -190,13 +209,18 @@
           <verbose>true</verbose>
         </configuration>
 
-        <!--此处必须添加mysql驱动包-->
         <dependencies>
+          <!--此处必须添加mysql驱动包-->
           <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
             <version>5.1.30</version>
+          </dependency>
+          <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+            <version>4.0.4</version>
           </dependency>
         </dependencies>
       </plugin>

@@ -3,6 +3,8 @@ package com.ym.mapper;
 import com.ym.entity.Teacher;
 import com.ym.entity.TeacherExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface TeacherMapper {
@@ -40,6 +42,19 @@ public interface TeacherMapper {
      * @return
      */
     int updateTeacher(Teacher teacher);
+
+    /**
+     * 分页查询
+     * @param startPage  起始页
+     * @param pageSize 每页显示的条数
+     * @return
+     */
+    //1.索引方式入参
+    //List<Teacher> getTeacherByPage(int startPage,int pageSize);
+    //2.注解方式入参
+    List<Teacher> getTeacherByPage(@Param("startPage") int startPage,@Param("pageSize")int pageSize);
+    //map方式入参
+    //List<Teacher> getTeacherByPage(Map<String,Object> map);
 
 
 

@@ -13,8 +13,13 @@
         <plugin interceptor="com.github.pagehelper.PageInterceptor">
             <property name="reasonable" value="true"/>
         </plugin>
-    </plugins>-->
+    </plugins>
 
+    &lt;!&ndash;配置别名&ndash;&gt;
+    <typeAliases>
+        <package name="com.ym.entity"/>
+    </typeAliases>
+-->
     <!--读取数据库属性配置文件-->
     <properties resource="db.properties" ></properties>
     <!--配置环境 开发模式配置-->

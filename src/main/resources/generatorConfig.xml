@@ -4,9 +4,12 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
+    <!--读取数据库属性配置文件-->
+    <properties resource="db.properties" ></properties>
 
     <!--数据库驱动  选择本地硬盘上的数据库驱动包-->
     <classPathEntry location="D:\mysql-connector-java-5.1.30.jar" />
+
     <context id="sqlserverTables" targetRuntime="MyBatis3">
         <!-- 生成的pojo，将implements Serializable -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
@@ -16,8 +19,10 @@
         </commentGenerator>
 
         <!-- 数据库链接URL、用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/studydb" userId="root" password="123456">
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}">
         </jdbcConnection>
 
         <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true，把JDBC DECIMAL
@@ -47,6 +52,9 @@
         <!-- 列出要生成代码的所有表，tableName要生成的数据库表名  domainObjectName生成的实体类名称 -->
         <table tableName="teacher" domainObjectName="Teacher">
             <property name="useActualColumnNames" value="true" />
+
+            <!-- column="t_id" 主键名字
+            <generatedKey column="t_id" sqlStatement="JDBC"></generatedKey>-->
         </table>
 
         <table tableName="dept" domainObjectName="Dept">
@@ -54,4 +62,5 @@
         </table>
 
     </context>
+
 </generatorConfiguration>

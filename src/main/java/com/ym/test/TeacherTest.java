@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class TeacherTest {
@@ -122,13 +124,18 @@ public class TeacherTest {
     }
 
 
+    /**
+     * 修改教师信息
+     */
     @Test
     public void updateTeacher() {
         SqlSession sqlSession = null;
         try {
             sqlSession = MybatisUtil.createSqlSession();
-            Teacher teacher = new Teacher();
-            teacher.setT_id(35);
+            Teacher teacher = sqlSession.getMapper(TeacherMapper.class).getTeacherById(35);
+            System.out.println("【修改之前的数据：】"+"\n"+teacher);
+            //Teacher teacher = new Teacher();
+            //teacher.setT_id(35);
             teacher.setT_name("董得村");
             teacher.setT_sex("男");
             teacher.setT_age("23");
@@ -141,8 +148,10 @@ public class TeacherTest {
             //提交事务  在增加，修改，删除的时候必须要提交事务 否则不会成功
 
             int t_id = teacher.getT_id();
-            System.out.println("添加主键ID："+t_id);
+            System.out.println("修改主键ID："+t_id);
             sqlSession.commit();
+            Teacher uTeacher = sqlSession.getMapper(TeacherMapper.class).getTeacherById(t_id);
+            System.out.println("【修改之后的数据：】"+"\n"+uTeacher);
         }catch (Exception e){
             e.printStackTrace();
             //关闭事务
@@ -153,6 +162,37 @@ public class TeacherTest {
         }
     }
 
+
+    /**
+     * 分页查询教师信息
+     */
+    @Test
+    public void getTeacherByPage() {
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = MybatisUtil.createSqlSession();
+            /*
+            Map<String,Object> map = new HashMap<>();
+            map.put("startPage",0);
+            map.put("pageSize",10);
+            List<Teacher> List = sqlSession.getMapper(TeacherMapper.class).getTeacherByPage(map);*/
+            List<Teacher> List = sqlSession.getMapper(TeacherMapper.class).getTeacherByPage(0, 10);
+            if (List.size() > 0) {
+                System.out.println("起始页："+1);
+                System.out.println("每页显示的条数："+List.size());
+                for (Teacher teacher : List) {
+                    System.out.println(teacher);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            //关闭事务
+            MybatisUtil.closeSqlSession(sqlSession);
+        }finally {
+            //事务回滚操作
+            sqlSession.rollback();
+        }
+    }
 
 
 }
