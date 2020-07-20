@@ -12,6 +12,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @ProjectName:
+ * @Auther: Meng.yang
+ * @Description: XML文本转换实体类
+ * @Date: 2020/07/20
+ */
 public class MessageUtil {
 
     /**
@@ -43,6 +49,7 @@ public class MessageUtil {
 
         }
         return resultMap;
+
     }
 
     /**
